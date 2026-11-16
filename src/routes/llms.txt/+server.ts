@@ -20,18 +20,8 @@ export const GET: RequestHandler = ({ url }) => {
 
 ## Core pages
 
-- [Home](${origin}/): landing page with feature overview
-- [Scanner](${origin}/scanner): the main app, upload or paste a resume to scan
-- [About](${origin}/about): why this exists, how it works, how it differs from other ATS checkers
+- [Scanner](${origin}/): the main app, upload or paste a resume to scan
 - [History](${origin}/history): per-user scan history (sign-in required)
-
-## Documentation
-
-- [Getting Started](${origin}/docs/getting-started/introduction/): introduction, quick start, how it works
-- [ATS Platforms](${origin}/docs/platforms/overview/): per-platform parsing notes (Workday, Taleo, iCIMS, Greenhouse, Lever, SuccessFactors)
-- [Scoring Methodology](${origin}/docs/scoring/methodology/): how scores are computed, dimensions, pass/fail thresholds
-- [API Reference](${origin}/docs/api/endpoints/): public endpoints, rate limits, error handling
-- [Self-Hosting](${origin}/docs/self-hosting/setup/): setup, configuration, and deployment guides
 
 ## Project
 
@@ -39,10 +29,6 @@ export const GET: RequestHandler = ({ url }) => {
 - [Source code](https://github.com/sunnypatell/ats-screener): MIT-licensed repository
 - [Issue tracker](https://github.com/sunnypatell/ats-screener/issues): bug reports and feature requests
 - [Contributing guide](https://github.com/sunnypatell/ats-screener/blob/main/CONTRIBUTING.md)
-
-## Legal
-
-- [Privacy and Data Handling](${origin}/docs/legal/privacy/): what is collected, retention, third parties, user rights
 
 ## Optional
 

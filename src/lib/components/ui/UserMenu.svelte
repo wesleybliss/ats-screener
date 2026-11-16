@@ -53,7 +53,7 @@
 				{/if}
 			</div>
 			<div class="dropdown-divider"></div>
-			<a href="/scanner" class="dropdown-item" onclick={() => (open = false)}>
+			<a href="/" class="dropdown-item" onclick={() => (open = false)}>
 				<svg
 					width="14"
 					height="14"

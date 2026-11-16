@@ -12,8 +12,7 @@
 	"scripts": {
 		"prepare": "svelte-kit sync || echo ''",
 		"dev": "vite dev --host 0.0.0.0 --port 3014",
-		"build": "svelte-kit sync && pnpm build:docs && vite build",
-		"build:docs": "cd docs && pnpm install --frozen-lockfile && pnpm build && cd .. && rm -rf static/docs && cp -r docs/dist static/docs",
+		"build": "svelte-kit sync && vite build",
 		"build:app": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

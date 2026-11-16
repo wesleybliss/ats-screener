@@ -170,9 +170,6 @@
 			</div>
 			<p class="privacy-hint">
 				Parsed entirely in your browser. The file itself never reaches our servers.
-				<a href="/docs/legal/privacy/" class="privacy-link" onclick={(e) => e.stopPropagation()}>
-					Read more
-				</a>
 			</p>
 		</div>
 	{/if}
@@ -271,27 +268,6 @@
 		color: var(--text-tertiary);
 		opacity: 0.75;
 		line-height: 1.5;
-	}
-
-	.privacy-link {
-		color: var(--accent-cyan);
-		text-decoration: none;
-		border-bottom: 1px solid transparent;
-		transition: border-color 0.15s ease;
-		margin-left: 0.25rem;
-	}
-
-	.privacy-link:hover,
-	.privacy-link:focus-visible {
-		border-bottom-color: var(--accent-cyan);
-	}
-
-	/* let the global :focus-visible ring (in $lib/styles/global.css) apply on
-	   keyboard focus. removing it would mean the only focus indicator on this
-	   inline link is the underline, which is too subtle for keyboard users. */
-	.privacy-link:focus-visible {
-		border-radius: 2px;
-		outline-offset: 2px;
 	}
 
 	.file-info {

@@ -11,8 +11,7 @@ import { verifySession, SESSION_COOKIE } from '$lib/server/auth/session';
 import { isAuthPublicPath } from '$lib/server/auth/guard';
 import { buildContentSecurityPolicy } from '$lib/server/csp';
 // no node built-ins here - hooks.server.ts is bundled into BOTH node and edge
-// route functions, and edge bundling fails on fs/path/node:crypto. docs serving
-// (which used fs) lives in a node-runtime catchall route at /docs/[...slug].
+// route functions, and edge bundling fails on fs/path/node:crypto.
 // the auth-session imports above stay edge-safe on purpose: config.ts is pure
 // string work and session.ts verifies the cookie with Web Crypto (not node:crypto).
 

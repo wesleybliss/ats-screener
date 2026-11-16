@@ -22,18 +22,9 @@ const SCAN_EXTENSIONS = ['.svelte', '.ts', '.js'];
 // flows from a network request, the LLM, or user input belongs in the
 // failing path, not here.
 const ALLOWED_HTML_FILES = new Set<string>([
-	// JSON-LD script for the landing page. ldJson is built from a literal
-	// object in the same file (no user input), and '<' is already escaped to
-	// its unicode form before interpolation, so a future user-controlled
-	// field cannot close the surrounding <script> tag.
-	'src/routes/+page.svelte',
-	// Person JSON-LD on the about page. same threat model as the landing:
-	// personLd is built from a literal object in the same file (no user
-	// input), and '<' is escaped to its unicode form before interpolation.
-	'src/routes/about/+page.svelte',
-	// pagefind excerpts are generated at build time from our own /docs
-	// source and pre-sanitized by pagefind. no runtime user input flows in.
-	'src/lib/components/ui/SearchModal.svelte'
+	// intentionally empty: the previous allowlist covered JSON-LD on the
+	// landing/about pages and pagefind excerpts in SearchModal, all of which
+	// were removed with those surfaces.
 ]);
 const RAW_HTML_PATTERN = /\{@html\b/;
 const INNER_HTML_PATTERN = /\.\s*innerHTML\s*=/;

@@ -143,7 +143,7 @@
 					</svg>
 					<h2>No scans yet</h2>
 					<p>Your scan results will appear here after you scan a resume.</p>
-					<a href="/scanner" class="cta-btn">Scan a Resume</a>
+					<a href="/" class="cta-btn">Scan a Resume</a>
 				</div>
 			{:else}
 				{#if journey && journey.totalScans >= 2}

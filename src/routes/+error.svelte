@@ -71,12 +71,7 @@
 		}
 	});
 
-	const suggestedLinks = [
-		{ href: '/', label: 'Home', icon: 'home' },
-		{ href: '/scanner', label: 'Scanner', icon: 'scan' },
-		{ href: '/docs', label: 'Docs', icon: 'book' },
-		{ href: '/about', label: 'About', icon: 'info' }
-	] as const;
+	const suggestedLinks = [{ href: '/', label: 'Scanner' }] as const;
 </script>
 
 <SeoHead
@@ -148,62 +143,18 @@
 			<nav class="suggested-nav" aria-label="suggested pages">
 				{#each suggestedLinks as link}
 					<a href={link.href} class="nav-chip">
-						{#if link.icon === 'home'}
-							<svg
-								width="14"
-								height="14"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								aria-hidden="true"
-								><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline
-									points="9,22 9,12 15,12 15,22"
-								/></svg
-							>
-						{:else if link.icon === 'scan'}
-							<svg
-								width="14"
-								height="14"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								aria-hidden="true"
-								><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline
-									points="14,2 14,8 20,8"
-								/></svg
-							>
-						{:else if link.icon === 'book'}
-							<svg
-								width="14"
-								height="14"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								aria-hidden="true"
-								><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path
-									d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
-								/></svg
-							>
-						{:else}
-							<svg
-								width="14"
-								height="14"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								aria-hidden="true"
-								><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line
-									x1="12"
-									y1="16"
-									x2="12.01"
-									y2="16"
-								/></svg
-							>
-						{/if}
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							aria-hidden="true"
+							><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline
+								points="14,2 14,8 20,8"
+							/></svg
+						>
 						{link.label}
 					</a>
 				{/each}
@@ -239,8 +190,7 @@
 				{/if}
 			</p>
 			<div class="error-actions">
-				<a href="/" class="btn-primary">Back to home</a>
-				<a href="/scanner" class="btn-secondary">Open scanner</a>
+				<a href="/" class="btn-primary">Back to scanner</a>
 			</div>
 		</div>
 	</main>
@@ -580,8 +530,7 @@
 		justify-content: center;
 	}
 
-	.btn-primary,
-	.btn-secondary {
+	.btn-primary {
 		display: inline-flex;
 		align-items: center;
 		padding: 0.65rem 1.35rem;
@@ -589,31 +538,15 @@
 		font-weight: 600;
 		border-radius: var(--radius-full);
 		text-decoration: none;
-		transition:
-			transform 0.2s ease,
-			box-shadow 0.2s ease,
-			border-color 0.2s ease,
-			color 0.2s ease;
-	}
-
-	.btn-primary {
 		color: var(--color-bg-primary);
 		background: var(--gradient-primary);
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 	}
 
 	.btn-primary:hover {
 		transform: translateY(-1px);
 		box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-	}
-
-	.btn-secondary {
-		color: var(--text-secondary);
-		background: var(--glass-bg);
-		border: 1px solid var(--glass-border);
-	}
-
-	.btn-secondary:hover {
-		border-color: var(--accent-cyan);
-		color: var(--text-primary);
 	}
 </style>

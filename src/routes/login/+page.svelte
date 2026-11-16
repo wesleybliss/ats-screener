@@ -26,14 +26,14 @@
 
 	// redirect if already logged in OR if auth is disabled (self-host:
 	// firebase not configured, so there's no sign-in to do). either way the
-	// user should be on /scanner.
+	// user should be on the scanner (/).
 	$effect(() => {
 		if (authStore.disabled) {
-			goto('/scanner');
+			goto('/');
 			return;
 		}
 		if (authStore.isAuthenticated && !authStore.loading) {
-			goto('/scanner');
+			goto('/');
 		}
 	});
 
@@ -54,7 +54,7 @@
 		try {
 			if (mode === 'signin') {
 				await authStore.signInWithEmail(normalizedEmail, password);
-				goto('/scanner');
+				goto('/');
 			} else {
 				await authStore.signUpWithEmail(normalizedEmail, password, normalizedDisplayName);
 				signupDone = true;
@@ -71,7 +71,7 @@
 		authStore.clearError();
 		try {
 			await authStore.signInWithGoogle();
-			goto('/scanner');
+			goto('/');
 		} catch {
 			// error is set in authStore
 		} finally {
@@ -280,7 +280,7 @@
 						Account created! We sent a verification email to <strong>{email}</strong>.
 					</div>
 					<p class="spam-hint">Don't see it? Check your spam or junk folder.</p>
-					<button class="submit-btn" onclick={() => goto('/scanner')}> Continue to Scanner </button>
+					<button class="submit-btn" onclick={() => goto('/')}> Continue to Scanner </button>
 				</div>
 			{:else}
 				<!-- mode tabs -->

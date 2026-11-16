@@ -81,7 +81,7 @@ describe('isExtensionNoise', () => {
 			'csp-report': {
 				'violated-directive': 'script-src',
 				'blocked-uri': 'https://evil.example/inject.js',
-				'document-uri': 'https://ats-screener.vercel.app/scanner'
+				'document-uri': 'https://ats-screener.vercel.app/'
 			}
 		};
 		expect(isExtensionNoise(body)).toBe(false);

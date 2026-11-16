@@ -20,9 +20,7 @@ describe('isAuthPublicPath', () => {
 
 	it('denies app pages and APIs', () => {
 		expect(isAuthPublicPath('/')).toBe(false);
-		expect(isAuthPublicPath('/scanner')).toBe(false);
 		expect(isAuthPublicPath('/history')).toBe(false);
 		expect(isAuthPublicPath('/api/analyze')).toBe(false);
-		expect(isAuthPublicPath('/docs/index.html')).toBe(false);
 	});
 });

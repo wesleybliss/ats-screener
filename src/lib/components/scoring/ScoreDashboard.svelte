@@ -157,7 +157,7 @@
 	);
 
 	// twitter share intent for the "I improved" moment - the URL points at /share
-	// (not the homepage) so twitter's crawler fetches a page whose og:image is a
+	// (not the root scanner) so twitter's crawler fetches a page whose og:image is a
 	// dynamic PNG rendering this user's actual delta and score
 	function shareImprovementToTwitter() {
 		if (!comparison || comparison.deltaAverage <= 0 || typeof window === 'undefined') return;

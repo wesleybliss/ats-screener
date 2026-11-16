@@ -37,9 +37,9 @@ export const load: PageServerLoad = async ({ locals }) => {
 	const merged = { ...env, ...publicEnv };
 	const mode = resolveAuthMode(merged);
 	// no sign-in surface in anonymous mode
-	if (mode === 'none') throw redirect(303, '/scanner');
+	if (mode === 'none') throw redirect(303, '/');
 	// already have a server session (ldap / password)
-	if (locals.user) throw redirect(303, '/scanner');
+	if (locals.user) throw redirect(303, '/');
 	return {};
 };
 
@@ -50,7 +50,7 @@ export const actions: Actions = {
 	default: async ({ request, cookies, getClientAddress, url }) => {
 		const merged = { ...env, ...publicEnv };
 		const mode = resolveAuthMode(merged);
-		if (mode !== 'ldap' && mode !== 'password') throw redirect(303, '/scanner');
+		if (mode !== 'ldap' && mode !== 'password') throw redirect(303, '/');
 
 		const ip = getClientAddress();
 		const gate = checkLoginRateLimit(ip);
@@ -82,7 +82,7 @@ export const actions: Actions = {
 					username: ''
 				});
 			}
-			if (!cfg) throw redirect(303, '/scanner');
+			if (!cfg) throw redirect(303, '/');
 
 			const ok = await verifyGlobalPassword(cfg.password, password);
 			if (!ok) {
@@ -97,7 +97,7 @@ export const actions: Actions = {
 			);
 			cookies.set(SESSION_COOKIE, token, sessionCookieOptions(cfg.sessionMaxAgeSec, secure));
 			logger.info('password.login_success', { sub: GLOBAL_PASSWORD_USER.sub });
-			throw redirect(303, '/scanner');
+			throw redirect(303, '/');
 		}
 
 		// --- ldap ---
@@ -120,7 +120,7 @@ export const actions: Actions = {
 				username
 			});
 		}
-		if (!provider) throw redirect(303, '/scanner');
+		if (!provider) throw redirect(303, '/');
 
 		const result = await provider.authenticate(username, password);
 		if (!result.ok) {
@@ -136,6 +136,6 @@ export const actions: Actions = {
 		);
 		cookies.set(SESSION_COOKIE, token, sessionCookieOptions(cfg.sessionMaxAgeSec, secure));
 		logger.info('ldap.login_success', { sub: result.user.sub });
-		throw redirect(303, '/scanner');
+		throw redirect(303, '/');
 	}
 };

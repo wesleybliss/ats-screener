@@ -93,7 +93,7 @@
 		</div>
 
 		<div class="cta">
-			<a href="/scanner" class="cta-btn">Scan your resume free</a>
+			<a href="/" class="cta-btn">Scan your resume free</a>
 		</div>
 
 		<div class="share-actions">
