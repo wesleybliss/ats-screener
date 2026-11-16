@@ -1,0 +1,11 @@
+# pnpm 12+ reads project settings from this file (not package.json#pnpm).
+allowBuilds:
+  esbuild: true
+  protobufjs: true
+  sharp: true
+  workerd: true
+  '@firebase/util': false
+  core-js: false
+
+overrides:
+  'rollup@<4.59.0': '^4.59.0'

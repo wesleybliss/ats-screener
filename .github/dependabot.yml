@@ -1,0 +1,113 @@
+version: 2
+
+# three manifests: the app at /, the starlight docs at /docs (own lockfile, not a workspace), the actions in ci.yml
+
+updates:
+  # ---------------------------------------------------------------- app
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    labels:
+      - dependencies
+    commit-message:
+      prefix: chore
+      prefix-development: chore
+      include: scope
+    # a compromised release is usually yanked within hours, so never adopt one on publish day
+    cooldown:
+      default-days: 7
+      semver-major-days: 21
+    groups:
+      # peer-locked to itself (vite-plugin-svelte 7 needs vite 8, eslint-plugin-svelte 3 needs eslint 10)
+      toolchain:
+        dependency-type: development
+        patterns:
+          - '*'
+      # majors land solo, they carry real behavioural risk here
+      runtime:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # typescript-eslint peers cap at <6.1.0, so 6.1 breaks pnpm lint, not just 7
+      - dependency-name: typescript
+        versions:
+          - '>=6.1'
+      # jsdom 30 wants node ^22.22.2 || ^24.15.0 and vercel builds on 24.13.x
+      - dependency-name: jsdom
+        versions:
+          - '>=30'
+      # tracks the deployed runtime, not npm latest, else the types describe missing apis
+      - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-major
+      # 1.0.2+ bundle satori's harfbuzzjs, whose require("fs") throws under esm and kills the ssr build
+      - dependency-name: '@vercel/og'
+        versions:
+          - '1.0.2'
+          - '1.0.3'
+      # held behind a deliberate node floor bump: kit 3 wants >=22.17 and moves config into the vite plugin
+      - dependency-name: '@sveltejs/kit'
+        versions:
+          - '>=3'
+      # 7.x peers kit ^3
+      - dependency-name: '@sveltejs/adapter-vercel'
+        versions:
+          - '>=7'
+      # 13.x @firebase/* packages want node >=24.12, which drops the advertised node 22
+      - dependency-name: firebase
+        versions:
+          - '>=13'
+
+  # --------------------------------------------------------------- docs
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    versioning-strategy: increase
+    labels:
+      - dependencies
+      - docs
+    commit-message:
+      prefix: chore
+      include: scope
+    cooldown:
+      default-days: 7
+      semver-major-days: 21
+    groups:
+      # starlight peers on an exact astro major, so a solo astro bump never installs
+      astro:
+        patterns:
+          - '*'
+    ignore:
+      # 7.4 wants node >=22.23.4, past the advertised ^22.13 floor
+      - dependency-name: astro
+        versions:
+          - '>=7.4'
+      # 7.3.3+ pull @astrojs/prism 4.1 (node >=22.22), and ci's latest-22 leg can't see it
+      - dependency-name: '@astrojs/markdown-remark'
+        versions:
+          - '>=7.3.3'
+
+  # ------------------------------------------------------------- actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    labels:
+      - ci
+    commit-message:
+      prefix: ci
+      include: scope
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns:
+          - '*'
